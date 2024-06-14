@@ -261,7 +261,9 @@ def enable(*, set_cuda_current_device: bool = True, overwrite: bool = False, all
             _check_env_variable(key, value)
         os.environ[key] = value
 
+    print('right before')
     dist.init_process_group(backend="nccl")
+    print('right after')
     dist.barrier()
 
     # Finalize setup
