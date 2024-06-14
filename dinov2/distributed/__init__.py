@@ -263,7 +263,7 @@ def enable(*, set_cuda_current_device: bool = True, overwrite: bool = False, all
 
     print('right before')
     print('rank: ', _LOCAL_RANK)
-    dist.init_process_group(backend="nccl", rank=_LOCAL_RANK)
+    dist.init_process_group(backend="nccl", rank=0, world_size=1)
     print('right after')
     dist.barrier()
 
