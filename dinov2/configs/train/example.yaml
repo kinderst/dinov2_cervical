@@ -2,7 +2,7 @@
 # Remember to change the path to root and extra, unless they are actually at /data/root and /data/extra
 # I have tested this configuration with a 16GB GPU
 train:
-  dataset_path: ImageNet:split=TRAIN:root=/data/root:extra=/data/extra
+  dataset_path: ImageNet:split=TRAIN:root=/projects/skinder@xsede.org/cervix_datasets/example_imagenet/data/root:extra=/projects/skinder@xsede.org/cervix_datasets/example_imagenet/data/extra
   batch_size_per_gpu: 8
 student:
   block_chunks: 4
