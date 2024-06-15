@@ -261,10 +261,8 @@ def enable(*, set_cuda_current_device: bool = True, overwrite: bool = False, all
             _check_env_variable(key, value)
         os.environ[key] = value
 
-    print('right before')
-    print('rank: ', _LOCAL_RANK)
+    # Hard code rank=0 and world_size=1 to run on single node
     dist.init_process_group(backend="nccl", rank=0, world_size=1)
-    print('right after')
     dist.barrier()
 
     # Finalize setup
