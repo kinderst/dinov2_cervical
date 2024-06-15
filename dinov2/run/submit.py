@@ -89,34 +89,45 @@ def get_shared_folder() -> Path:
     return path
 
 
+# def submit_jobs(task_class, args, name: str):
+#     if not args.output_dir:
+#         args.output_dir = str(get_shared_folder() / "%j")
+
+#     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
+#     executor = submitit.AutoExecutor(folder=args.output_dir, slurm_max_num_timeout=30)
+
+#     kwargs = {}
+#     if args.use_volta32:
+#         kwargs["slurm_constraint"] = "volta32gb"
+#     if args.comment:
+#         kwargs["slurm_comment"] = args.comment
+#     if args.exclude:
+#         kwargs["slurm_exclude"] = args.exclude
+
+#     executor_params = get_slurm_executor_parameters(
+#         nodes=args.nodes,
+#         num_gpus_per_node=args.ngpus,
+#         timeout_min=args.timeout,  # max is 60 * 72
+#         slurm_signal_delay_s=120,
+#         slurm_partition=args.partition,
+#         **kwargs,
+#     )
+#     executor.update_parameters(name=name, **executor_params)
+
+#     task = task_class(args)
+#     job = executor.submit(task)
+
+#     logger.info(f"Submitted job_id: {job.job_id}")
+#     str_output_dir = os.path.abspath(args.output_dir).replace("%j", str(job.job_id))
+#     logger.info(f"Logs and checkpoints will be saved at: {str_output_dir}")
+
 def submit_jobs(task_class, args, name: str):
     if not args.output_dir:
-        args.output_dir = str(get_shared_folder() / "%j")
+        args.output_dir = str(get_shared_folder() / "output")
 
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
-    executor = submitit.AutoExecutor(folder=args.output_dir, slurm_max_num_timeout=30)
-
-    kwargs = {}
-    if args.use_volta32:
-        kwargs["slurm_constraint"] = "volta32gb"
-    if args.comment:
-        kwargs["slurm_comment"] = args.comment
-    if args.exclude:
-        kwargs["slurm_exclude"] = args.exclude
-
-    executor_params = get_slurm_executor_parameters(
-        nodes=args.nodes,
-        num_gpus_per_node=args.ngpus,
-        timeout_min=args.timeout,  # max is 60 * 72
-        slurm_signal_delay_s=120,
-        slurm_partition=args.partition,
-        **kwargs,
-    )
-    executor.update_parameters(name=name, **executor_params)
 
     task = task_class(args)
-    job = executor.submit(task)
+    task()
 
-    logger.info(f"Submitted job_id: {job.job_id}")
-    str_output_dir = os.path.abspath(args.output_dir).replace("%j", str(job.job_id))
-    logger.info(f"Logs and checkpoints will be saved at: {str_output_dir}")
+    logger.info(f"Logs and checkpoints will be saved at: {args.output_dir}")
