@@ -135,7 +135,7 @@ class ImageNet(ExtendedVisionDataset):
     def get_image_data(self, index: int) -> bytes:
         entries = self._get_entries()
         actual_index = entries[index]["actual_index"]
-        print('actual_index: ', actual_index)
+        # print('actual_index: ', actual_index)
 
         class_id = self.get_class_id(index)
 
