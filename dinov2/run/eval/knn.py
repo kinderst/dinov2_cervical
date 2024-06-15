@@ -35,7 +35,8 @@ class Evaluator:
     def _setup_args(self):
         import submitit
 
-        job_env = submitit.JobEnvironment()
+        # job_env = submitit.JobEnvironment()
+        job_env = 'local'
         self.args.output_dir = self.args.output_dir.replace("%j", str(job_env.job_id))
         logger.info(f"Process group: {job_env.num_tasks} tasks, rank: {job_env.global_rank}")
         logger.info(f"Args: {self.args}")
