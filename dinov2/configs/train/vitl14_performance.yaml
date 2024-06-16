@@ -13,7 +13,7 @@ student:
   patch_size: 14
   drop_path_rate: 0.4
   ffn_layer: swiglufused
-  pretrained_weights: '/scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/run_dev_1/model_0003749.rank_0.pth'
+  pretrained_weights: '/scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/run_2_old/model_0041249.rank_0.pth'
   block_chunks: 4
   num_register_tokens: 4
 teacher:
