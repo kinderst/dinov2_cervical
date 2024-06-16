@@ -10,6 +10,8 @@ Doing additional pre-training from their pre-trained weights isn't supported. Th
 
 Recommendation how to do pre-training from weights if want to try: https://github.com/facebookresearch/dinov2/issues/248
 
+Example loss curves: https://github.com/facebookresearch/dinov2/issues/143
+
 :new: [2023-10-26] *Added DINOv2 backbones with registers, following [Vision Transformers Need Registers](https://arxiv.org/abs/2309.16588).*
 
 # DINOv2: Learning Robust Visual Features without Supervision
