@@ -222,7 +222,7 @@ def do_train(cfg, model, resume=False):
 
     # SCOTT
     # I.e. if batch size is 32, accumulate for 64 steps to get batch size of 2048
-    gradient_accumulation_steps = cfg.train.batch_size_per_gpu // cfg.train.batch_size_per_gpu
+    gradient_accumulation_steps = 2048 // cfg.train.batch_size_per_gpu
 
     for data in metric_logger.log_every(
         data_loader,
@@ -253,6 +253,7 @@ def do_train(cfg, model, resume=False):
 
         # SCOTT
         if (iteration + 1) % gradient_accumulation_steps == 0:
+            print("------taking step--------")
             if fp16_scaler is not None:
                 if cfg.optim.clip_grad:
                     fp16_scaler.unscale_(optimizer)
