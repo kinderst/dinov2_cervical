@@ -43,8 +43,10 @@ class SSLMetaArch(nn.Module):
         logger.info(f"OPTIONS -- architecture : embed_dim: {embed_dim}")
 
         if cfg.student.pretrained_weights:
-            state_dict = torch.load(cfg.student.pretrained_weights)['model']
+            # state_dict = torch.load(cfg.student.pretrained_weights)['model']
+            state_dict = torch.load(cfg.student.pretrained_weights)
             logger.info(f"OPTIONS -- pretrained weights: loading from {cfg.student.pretrained_weights}")
+            # There is no student/teacher/backbone for the pretrained ones but works anyways shrug
             # create student state dict and remove `student.` prefix
             student_state_dict = {k.replace("student.", ""): v for k, v in state_dict.items()}
             # remove `backbone.` prefix induced by multicrop wrapper
