@@ -16,6 +16,7 @@ student:
   # pretrained_weights: '/scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/run_2_old/model_0041249.rank_0.pth'
   pretrained_weights: '/scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/imagenet/dinov2_vitl14_reg4_pretrain.pth'
   block_chunks: 0
+  layerscale: 1.0
   num_register_tokens: 4
 teacher:
   momentum_teacher: 0.994
