@@ -2,6 +2,14 @@ Updated 6/12 - Scott Kinder
 
 ![Tests](https://github.com/kinderst/dinov2_cervical/actions/workflows/lint.yaml/badge.svg)
 
+# Fixes
+
+...
+
+Doing additional pre-training from their pre-trained weights isn't supported. They release only teacher. Source: https://github.com/facebookresearch/dinov2/issues/339.
+
+Recommendation how to do pre-training from weights if want to try: https://github.com/facebookresearch/dinov2/issues/248
+
 :new: [2023-10-26] *Added DINOv2 backbones with registers, following [Vision Transformers Need Registers](https://arxiv.org/abs/2309.16588).*
 
 # DINOv2: Learning Robust Visual Features without Supervision
