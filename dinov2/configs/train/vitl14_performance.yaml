@@ -5,14 +5,14 @@ ibot:
   separate_head: true
   head_n_prototypes: 131072
 train:
-  batch_size_per_gpu: 8
+  batch_size_per_gpu: 16
   dataset_path: ImageNetCervicalPerformance:split=TRAIN:root=/projects/skinder@xsede.org/cervix_datasets/official/performance/data/root:extra=/projects/skinder@xsede.org/cervix_datasets/official/performance/data/extra
   centering: sinkhorn_knopp
 student:
   arch: vit_large
   patch_size: 14
   drop_path_rate: 0.4
-  ffn_layer: swiglu
+  ffn_layer: mlp
   # pretrained_weights: '/scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/run_2_old/model_0041249.rank_0.pth'
   pretrained_weights: '/scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/imagenet/dinov2_vitl14_reg4_pretrain.pth'
   block_chunks: 0
