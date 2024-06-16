@@ -19,9 +19,7 @@ cd /projects/skinder@xsede.org/repos/dinov2_cervical
 
 sleep 3
 
-torchrun dinov2/train/train.py \
-    --rdzv-backend c10d \
-    --rdzv-endpoint localhost:0 \
+python -m torch.distributed.launch --master_port=25644 dinov2/train/train.py \
     --config-file /projects/skinder@xsede.org/repos/dinov2_cervical/dinov2/configs/train/vitb14_research.yaml \
     --output-dir /scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/research/run_1
 
