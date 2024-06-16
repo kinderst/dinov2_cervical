@@ -11,7 +11,7 @@ from typing import Callable, List, Optional, Tuple, Union
 
 import numpy as np
 
-from image_net import ImageNet
+from .image_net import ImageNet
 
 
 logger = logging.getLogger("dinov2")
