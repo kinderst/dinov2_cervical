@@ -267,9 +267,9 @@ def do_train(cfg, model, resume=False):
                 optimizer.step()
             optimizer.zero_grad(set_to_none=True)
 
-        # perform teacher EMA update
+            # perform teacher EMA update
 
-        model.update_teacher(mom)
+            model.update_teacher(mom)
 
         # logging
 
