@@ -20,6 +20,8 @@ cd /projects/skinder@xsede.org/repos/dinov2_cervical
 sleep 3
 
 torchrun dinov2/train/train.py \
+    --rdzv-backend c10d \
+    --rdzv-endpoint localhost:0 \
     --config-file /projects/skinder@xsede.org/repos/dinov2_cervical/dinov2/configs/train/vitl14_performance.yaml \
     --output-dir /scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/run_1
 
