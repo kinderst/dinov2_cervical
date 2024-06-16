@@ -21,6 +21,6 @@ sleep 3
 
 python -m torch.distributed.launch --master_port=25651 dinov2/train/train.py \
     --config-file /projects/skinder@xsede.org/repos/dinov2_cervical/dinov2/configs/train/vitl14_performance.yaml \
-    --output-dir /scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/run_dev_1
+    --output-dir /scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/run_dev_2
 
 echo "== End =="
