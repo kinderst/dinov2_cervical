@@ -6,7 +6,7 @@ ibot:
   head_n_prototypes: 131072
 train:
   batch_size_per_gpu: 64
-  dataset_path: ImageNetCervicalResearch
+  dataset_path: ImageNetCervicalResearch:split=TRAIN:root=/projects/skinder@xsede.org/cervix_datasets/example_imagenet/data/root:extra=/projects/skinder@xsede.org/cervix_datasets/example_imagenet/data/extra
   centering: sinkhorn_knopp
 student:
   arch: vit_base
