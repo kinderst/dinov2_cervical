@@ -220,6 +220,10 @@ def do_train(cfg, model, resume=False):
     metric_logger = MetricLogger(delimiter="  ", output_file=metrics_file)
     header = "Training"
 
+    # SCOTT
+    # I.e. if batch size is 32, accumulate for 64 steps to get batch size of 2048
+    gradient_accumulation_steps = 2048 // cfg.train.batch_size_per_gpu
+
     for data in metric_logger.log_every(
         data_loader,
         10,
@@ -242,23 +246,26 @@ def do_train(cfg, model, resume=False):
 
         # compute losses
 
-        optimizer.zero_grad(set_to_none=True)
+        # optimizer.zero_grad(set_to_none=True)  # SCOTT
         loss_dict = model.forward_backward(data, teacher_temp=teacher_temp)
 
         # clip gradients
 
-        if fp16_scaler is not None:
-            if cfg.optim.clip_grad:
-                fp16_scaler.unscale_(optimizer)
-                for v in model.student.values():
-                    v.clip_grad_norm_(cfg.optim.clip_grad)
-            fp16_scaler.step(optimizer)
-            fp16_scaler.update()
-        else:
-            if cfg.optim.clip_grad:
-                for v in model.student.values():
-                    v.clip_grad_norm_(cfg.optim.clip_grad)
-            optimizer.step()
+        # SCOTT
+        if (iteration + 1) % gradient_accumulation_steps == 0:
+            if fp16_scaler is not None:
+                if cfg.optim.clip_grad:
+                    fp16_scaler.unscale_(optimizer)
+                    for v in model.student.values():
+                        v.clip_grad_norm_(cfg.optim.clip_grad)
+                fp16_scaler.step(optimizer)
+                fp16_scaler.update()
+            else:
+                if cfg.optim.clip_grad:
+                    for v in model.student.values():
+                        v.clip_grad_norm_(cfg.optim.clip_grad)
+                optimizer.step()
+            optimizer.zero_grad(set_to_none=True)
 
         # perform teacher EMA update
 
