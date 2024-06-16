@@ -26,6 +26,7 @@ def _make_dinov2_linear_classification_head(
     pretrained: bool = True,
     weights: Union[Weights, str] = Weights.IMAGENET1K,
     num_register_tokens: int = 0,
+    num_classes: int = 1_000,
     **kwargs,
 ):
     if layers not in (1, 4):
@@ -36,7 +37,7 @@ def _make_dinov2_linear_classification_head(
         except KeyError:
             raise AssertionError(f"Unsupported weights: {weights}")
 
-    linear_head = nn.Linear((1 + layers) * embed_dim, 1_000)
+    linear_head = nn.Linear((1 + layers) * embed_dim, num_classes)
 
     if pretrained:
         model_base_name = _make_dinov2_model_name(arch_name, patch_size)
@@ -92,6 +93,7 @@ def _make_dinov2_linear_classifier(
     num_register_tokens: int = 0,
     interpolate_antialias: bool = False,
     interpolate_offset: float = 0.1,
+    num_classes: int = 1_000,
     **kwargs,
 ):
     backbone = _make_dinov2_model(
@@ -113,6 +115,7 @@ def _make_dinov2_linear_classifier(
         pretrained=pretrained,
         weights=weights,
         num_register_tokens=num_register_tokens,
+        num_classes=num_classes
     )
 
     return _LinearClassifierWrapper(backbone=backbone, linear_head=linear_head, layers=layers)
