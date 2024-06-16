@@ -7,7 +7,7 @@ ibot:
 train:
   batch_size_per_gpu: 32
   dataset_path: ImageNetCervicalPerformance:split=TRAIN:root=/projects/skinder@xsede.org/cervix_datasets/official/performance/data/root:extra=/projects/skinder@xsede.org/cervix_datasets/official/performance/data/extra
-  centering: sinkhorn_knopp
+  centering: "centering"
 student:
   arch: vit_large
   patch_size: 14
@@ -21,7 +21,7 @@ teacher:
 optim:
   epochs: 100
   warmup_epochs: 20
-  base_lr: 7.0e-04  # learning rate for a batch size of 1024
+  base_lr: 7.0e-02  # learning rate for a batch size of 1024
   layerwise_decay: 1.0
 crops:
   local_crops_size: 98
