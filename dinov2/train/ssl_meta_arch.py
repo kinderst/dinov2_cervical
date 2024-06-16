@@ -43,9 +43,13 @@ class SSLMetaArch(nn.Module):
         logger.info(f"OPTIONS -- architecture : embed_dim: {embed_dim}")
 
         if cfg.student.pretrained_weights:
-            chkpt = torch.load(cfg.student.pretrained_weights)
+            student_state_dict = torch.load(cfg.student.pretrained_weights)
             logger.info(f"OPTIONS -- pretrained weights: loading from {cfg.student.pretrained_weights}")
-            missing_keys, unexpected_keys = student_backbone.load_state_dict(chkpt["model"], strict=False)
+            # remove `module.` prefix
+            student_state_dict = {k.replace("student.", ""): v for k, v in student_state_dict.items()}
+            # remove `backbone.` prefix induced by multicrop wrapper
+            student_state_dict = {k.replace("backbone.", ""): v for k, v in student_state_dict.items()}
+            missing_keys, unexpected_keys = student_backbone.load_state_dict(student_state_dict["model"], strict=False)
             print("Missing keys:", missing_keys)
             print("Unexpected keys:", unexpected_keys)
 
