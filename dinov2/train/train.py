@@ -65,6 +65,13 @@ def build_optimizer(cfg, params_groups):
 
 def build_schedulers(cfg):
     OFFICIAL_EPOCH_LENGTH = cfg.train.OFFICIAL_EPOCH_LENGTH
+    last_layer_lr_custom = lr = dict(
+        base_value=cfg.optim["lr"] / 100,
+        final_value=cfg.optim["min_lr"] / 100,
+        total_iters=cfg.optim["epochs"] * OFFICIAL_EPOCH_LENGTH,
+        warmup_iters=cfg.optim["warmup_epochs"] * OFFICIAL_EPOCH_LENGTH,
+        start_warmup_value=0,
+    )
     lr = dict(
         base_value=cfg.optim["lr"],
         final_value=cfg.optim["min_lr"],
@@ -94,7 +101,7 @@ def build_schedulers(cfg):
     wd_schedule = CosineScheduler(**wd)
     momentum_schedule = CosineScheduler(**momentum)
     teacher_temp_schedule = CosineScheduler(**teacher_temp)
-    last_layer_lr_schedule = CosineScheduler(**lr)
+    last_layer_lr_schedule = CosineScheduler(**last_layer_lr_custom)
 
     last_layer_lr_schedule.schedule[
         : cfg.optim["freeze_last_layer_epochs"] * OFFICIAL_EPOCH_LENGTH
