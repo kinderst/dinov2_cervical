@@ -262,7 +262,7 @@ def do_train(cfg, model, resume=False):
 
         # SCOTT
         if (iteration + 1) % gradient_accumulation_steps == 0:
-            print("------taking step--------")
+            # print("------taking step--------")
             if fp16_scaler is not None:
                 if cfg.optim.clip_grad:
                     fp16_scaler.unscale_(optimizer)
