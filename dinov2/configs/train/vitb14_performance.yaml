@@ -17,7 +17,7 @@ teacher:
 optim:
   epochs: 100
   warmup_epochs: 5
-  base_lr: 5.0e-03  # learning rate for a batch size of 1024
+  base_lr: 5.0e-05  # learning rate for a batch size of 1024
   layerwise_decay: 1.0
 crops:
   local_crops_size: 98
