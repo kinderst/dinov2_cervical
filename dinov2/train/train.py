@@ -135,6 +135,13 @@ def do_test(cfg, model, iteration):
 def do_train(cfg, model, resume=False):
     model.train()
     print('hey! ', model)
+    # Freeze the layers of student.backbone
+    for param in model.student.backbone._fsdp_wrapped_module.parameters():
+        param.requires_grad_(False)
+
+    # Freeze the layers of teacher.backbone
+    for param in model.teacher.backbone._fsdp_wrapped_module.parameters():
+        param.requires_grad_(False)
     inputs_dtype = torch.half
     fp16_scaler = model.fp16_scaler  # for mixed precision training
 
@@ -223,8 +230,8 @@ def do_train(cfg, model, resume=False):
 
     # SCOTT
     # I.e. if batch size is 32, accumulate for 64 steps to get batch size of 2048
-    # gradient_accumulation_steps = 2048 // cfg.train.batch_size_per_gpu
-    gradient_accumulation_steps = cfg.train.batch_size_per_gpu // cfg.train.batch_size_per_gpu
+    gradient_accumulation_steps = 2048 // cfg.train.batch_size_per_gpu
+    # gradient_accumulation_steps = cfg.train.batch_size_per_gpu // cfg.train.batch_size_per_gpu
 
     for data in metric_logger.log_every(
         data_loader,
