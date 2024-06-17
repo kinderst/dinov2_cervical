@@ -134,14 +134,14 @@ def do_test(cfg, model, iteration):
 
 def do_train(cfg, model, resume=False):
     model.train()
-    print('hey! ', model)
-    # Freeze the layers of student.backbone
-    for param in model.student.backbone._fsdp_wrapped_module.parameters():
-        param.requires_grad_(False)
+    # print('hey! ', model)
+    # # Freeze the layers of student.backbone
+    # for param in model.student.backbone._fsdp_wrapped_module.parameters():
+    #     param.requires_grad_(False)
 
-    # Freeze the layers of teacher.backbone
-    for param in model.teacher.backbone._fsdp_wrapped_module.parameters():
-        param.requires_grad_(False)
+    # # Freeze the layers of teacher.backbone
+    # for param in model.teacher.backbone._fsdp_wrapped_module.parameters():
+    #     param.requires_grad_(False)
     inputs_dtype = torch.half
     fp16_scaler = model.fp16_scaler  # for mixed precision training
 
