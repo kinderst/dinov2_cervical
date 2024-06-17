@@ -1,9 +1,5 @@
-dino:
-  head_n_prototypes: 131072
-  head_bottleneck_dim: 384
 ibot:
   separate_head: true
-  head_n_prototypes: 131072
 train:
   batch_size_per_gpu: 64
   dataset_path: ImageNetCervicalResearch:split=TRAIN:root=/projects/skinder@xsede.org/cervix_datasets/official/research/data/root:extra=/projects/skinder@xsede.org/cervix_datasets/official/research/data/extra
@@ -11,16 +7,16 @@ train:
 student:
   arch: vit_base
   patch_size: 14
-  drop_path_rate: 0.4
+  drop_path_rate: 0.2
   ffn_layer: swiglufused
   block_chunks: 4
   num_register_tokens: 4
 teacher:
   momentum_teacher: 0.994
-  warmup_teacher_temp_epochs: 25
+  warmup_teacher_temp_epochs: 10
 optim:
   epochs: 150
-  warmup_epochs: 20
+  warmup_epochs: 10
   base_lr: 0.004  # learning rate for a batch size of 1024
   layerwise_decay: 1.0
 crops:
