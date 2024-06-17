@@ -13,11 +13,12 @@ student:
   num_register_tokens: 4
 teacher:
   momentum_teacher: 0.994
-  warmup_teacher_temp_epochs: 10
+  warmup_teacher_temp_epochs: 20
 optim:
   epochs: 150
   warmup_epochs: 10
   base_lr: 0.004  # learning rate for a batch size of 1024
   layerwise_decay: 1.0
+  freeze_last_layer_epochs: 5
 crops:
   local_crops_size: 98

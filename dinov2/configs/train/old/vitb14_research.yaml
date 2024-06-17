@@ -19,6 +19,5 @@ optim:
   warmup_epochs: 10
   base_lr: 0.004  # learning rate for a batch size of 1024
   layerwise_decay: 1.0
-  freeze_last_layer_epochs: 3
 crops:
   local_crops_size: 98

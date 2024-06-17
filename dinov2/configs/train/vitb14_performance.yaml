@@ -2,7 +2,7 @@ ibot:
   separate_head: true
 train:
   batch_size_per_gpu: 64
-  dataset_path: ImageNetCervicalResearch:split=TRAIN:root=/projects/skinder@xsede.org/cervix_datasets/official/research/data/root:extra=/projects/skinder@xsede.org/cervix_datasets/official/research/data/extra
+  dataset_path: ImageNetCervicalPerformance:split=TRAIN:root=/projects/skinder@xsede.org/cervix_datasets/official/performance/data/root:extra=/projects/skinder@xsede.org/cervix_datasets/official/performance/data/extra
   centering: "centering"
 student:
   arch: vit_base
