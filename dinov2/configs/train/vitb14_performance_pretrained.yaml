@@ -3,7 +3,7 @@ ibot:
 train:
   batch_size_per_gpu: 16
   dataset_path: ImageNetCervicalPerformance:split=TRAIN:root=/projects/skinder@xsede.org/cervix_datasets/official/performance/data/root:extra=/projects/skinder@xsede.org/cervix_datasets/official/performance/data/extra
-  centering: sinkhorn_knopp
+  centering: "centering"
 student:
   arch: vit_base
   patch_size: 14
