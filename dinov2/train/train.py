@@ -66,8 +66,8 @@ def build_optimizer(cfg, params_groups):
 def build_schedulers(cfg):
     OFFICIAL_EPOCH_LENGTH = cfg.train.OFFICIAL_EPOCH_LENGTH
     last_layer_lr_custom = lr = dict(
-        base_value=cfg.optim["lr"] / 100,
-        final_value=cfg.optim["min_lr"] / 100,
+        base_value=cfg.optim["lr"] / 10000,
+        final_value=cfg.optim["min_lr"] / 10000,
         total_iters=cfg.optim["epochs"] * OFFICIAL_EPOCH_LENGTH,
         warmup_iters=cfg.optim["warmup_epochs"] * OFFICIAL_EPOCH_LENGTH,
         start_warmup_value=0,
