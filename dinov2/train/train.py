@@ -134,6 +134,7 @@ def do_test(cfg, model, iteration):
 
 def do_train(cfg, model, resume=False):
     model.train()
+    print('hey! ', model)
     inputs_dtype = torch.half
     fp16_scaler = model.fp16_scaler  # for mixed precision training
 
