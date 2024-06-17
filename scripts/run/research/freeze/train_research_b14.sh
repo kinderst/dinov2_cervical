@@ -19,7 +19,7 @@ cd /projects/skinder@xsede.org/repos/dinov2_cervical
 
 sleep 3
 
-python -m torch.distributed.launch --master_port=25702 dinov2/train/train.py \
+python -m torch.distributed.launch --master_port=25758 dinov2/train/train.py \
     --config-file /projects/skinder@xsede.org/repos/dinov2_cervical/dinov2/configs/train/vitb14_research.yaml \
     --output-dir /scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/research/run_vitb14_research
 

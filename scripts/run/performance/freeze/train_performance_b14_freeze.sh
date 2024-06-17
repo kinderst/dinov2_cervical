@@ -19,7 +19,7 @@ cd /projects/skinder@xsede.org/repos/dinov2_cervical
 
 sleep 3
 
-python -m torch.distributed.launch --master_port=25772 dinov2/train/train.py \
+python -m torch.distributed.launch --master_port=25751 dinov2/train/train.py \
     --config-file /projects/skinder@xsede.org/repos/dinov2_cervical/dinov2/configs/train/vitb14_performance_freeze.yaml \
     --output-dir /scratch/alpine/skinder@xsede.org/cervix_dinov2/outputs/performance/run_vitb14_performance_freeze
 
