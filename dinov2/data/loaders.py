@@ -10,7 +10,7 @@ from typing import Any, Callable, List, Optional, TypeVar
 import torch
 from torch.utils.data import Sampler
 
-from .datasets import ImageNet, ImageNet22k, ImageNetCervicalResearch, ImageNetCervicalPerformance
+from .datasets import ImageNet, ImageNet22k, ImageNetCervicalResearch, ImageNetCervicalPerformance, ImageNetCervicalNoPave
 from .samplers import EpochSampler, InfiniteSampler, ShardedInfiniteSampler
 
 
@@ -66,6 +66,10 @@ def _parse_dataset_str(dataset_str: str):
         class_ = ImageNetCervicalPerformance
         if "split" in kwargs:
             kwargs["split"] = ImageNetCervicalPerformance.Split[kwargs["split"]]
+    elif name == "ImageNetCervicalNoPave":
+        class_ = ImageNetCervicalNoPave
+        if "split" in kwargs:
+            kwargs["split"] = ImageNetCervicalNoPave.Split[kwargs["split"]]
     else:
         raise ValueError(f'Unsupported dataset "{name}"')
 

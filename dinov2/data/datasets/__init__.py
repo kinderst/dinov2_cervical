@@ -7,3 +7,4 @@ from .image_net import ImageNet
 from .image_net_22k import ImageNet22k
 from .image_net_cervical_performance import ImageNetCervicalPerformance
 from .image_net_cervical_research import ImageNetCervicalResearch
+from .image_net_cervical_no_pave import ImageNetCervicalNoPave
