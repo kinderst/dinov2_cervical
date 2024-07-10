@@ -12,6 +12,9 @@ logger = logging.getLogger("dinov2")
 
 
 def build_model(args, only_teacher=False, img_size=224):
+    print("WTF: ", args.proj_drop_rate)
+    print("WTF2: ", args.attn_drop_rate)
+    print("WTF3: ", args.drop_path_rate)
     args.arch = args.arch.removesuffix("_memeff")
     if "vit" in args.arch:
         vit_kwargs = dict(
@@ -27,7 +30,15 @@ def build_model(args, only_teacher=False, img_size=224):
             interpolate_offset=args.interpolate_offset,
             interpolate_antialias=args.interpolate_antialias,
         )
-        teacher = vits.__dict__[args.arch](**vit_kwargs)
+        if args.add_dropout:
+            teacher = vits.__dict__[args.arch](
+                **vit_kwargs,
+                drop_path_rate=args.drop_path_rate,
+                proj_drop_rate=args.proj_drop_rate,
+                attn_drop_rate=args.attn_drop_rate,
+            )
+        else:
+            teacher = vits.__dict__[args.arch](**vit_kwargs)
         if only_teacher:
             return teacher, teacher.embed_dim
         student = vits.__dict__[args.arch](

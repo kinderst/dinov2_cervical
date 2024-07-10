@@ -56,6 +56,8 @@ class DinoVisionTransformer(nn.Module):
         proj_bias=True,
         drop_path_rate=0.0,
         drop_path_uniform=False,
+        proj_drop_rate=0.0,
+        attn_drop_rate=0.0,
         init_values=None,  # for layerscale: None or 0 => no layerscale
         embed_layer=PatchEmbed,
         act_layer=nn.GELU,
@@ -80,6 +82,8 @@ class DinoVisionTransformer(nn.Module):
             ffn_bias (bool): enable bias for ffn if True
             drop_path_rate (float): stochastic depth rate
             drop_path_uniform (bool): apply uniform drop rate across blocks
+            proj_drop_rate (float): drop rate for projection (ADDED BY SCOTT)
+            attn_drop_rate (float): drop rate for attention (ADDED BY SCOTT)
             weight_init (str): weight init scheme
             init_values (float): layer-scale init values
             embed_layer (nn.Module): patch embedding layer
@@ -147,6 +151,8 @@ class DinoVisionTransformer(nn.Module):
                 act_layer=act_layer,
                 ffn_layer=ffn_layer,
                 init_values=init_values,
+                drop=proj_drop_rate,
+                attn_drop=attn_drop_rate
             )
             for i in range(depth)
         ]
